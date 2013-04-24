@@ -61,6 +61,9 @@
     <Reference Include="CommandLine">
       <HintPath>..\SQH.Lib\CommandLine.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\SQH.Lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,14 +77,15 @@
     <Compile Include="AllOptions.cs" />
     <Compile Include="AnnotationProcessor.cs" />
     <Compile Include="AnnotationOptions.cs" />
+    <Compile Include="Deploy.cs" />
     <Compile Include="FilterOptions.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="InitOptions.cs" />
+    <Compile Include="PileupOptions.cs" />
     <Compile Include="FilterProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\ThisAssembly.cs" />
-    <Compile Include="InitProcessor.cs" />
+    <Compile Include="PileupProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

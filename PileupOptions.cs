@@ -13,7 +13,7 @@ using CQS;
 
 namespace RSMC
 {
-  public class InitOptions : AbstractProgramOptions
+  public class PileupOptions : AbstractProgramOptions
   {
     public enum DataSourceType
     {
@@ -22,7 +22,7 @@ namespace RSMC
       console
     }
 
-    public InitOptions()
+    public PileupOptions()
     {
       this.IgnoreInsertionDeletion = true;
       this.IgnoreTerminalBase = false;

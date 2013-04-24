@@ -12,11 +12,11 @@ using CQS.Genome.Annotation;
 
 namespace RSMC
 {
-  public class InitProcessor
+  public class PileupProcessor
   {
-    private InitOptions options;
+    private PileupOptions options;
 
-    public InitProcessor(InitOptions options)
+    public PileupProcessor(PileupOptions options)
     {
       this.options = options;
     }
@@ -57,9 +57,9 @@ namespace RSMC
       public int strandFisherFailed = 0;
       public int candidateCount = 0;
 
-      private InitOptions options;
+      private PileupOptions options;
 
-      public Processor(InitOptions options)
+      public Processor(PileupOptions options)
       {
         this.options = options;
         this.rdFilter = new PileupItemReadDepthFilter(options.MinimumReadDepth, options.MinimumBaseQuality);
@@ -316,10 +316,10 @@ namespace RSMC
         PileupFile pfile = new PileupFile(parser);
         switch (options.From)
         {
-          case InitOptions.DataSourceType.mpileup:
+          case PileupOptions.DataSourceType.mpileup:
             pfile.Open(options.MpileupFile);
             break;
-          case InitOptions.DataSourceType.bam:
+          case PileupOptions.DataSourceType.bam:
             Process proc = ExecuteSamtools(options.GetSamtoolsCommand(), options.GetMpileupChromosomes());
             if (proc == null)
             {
@@ -329,7 +329,7 @@ namespace RSMC
             pfile.Open(proc.StandardOutput);
             pfile.Samtools = proc;
             break;
-          case InitOptions.DataSourceType.console:
+          case PileupOptions.DataSourceType.console:
             pfile.Open(Console.In);
             break;
         }
@@ -384,7 +384,7 @@ namespace RSMC
       else
       {
         var totalThread = options.ThreadCount - 1;
-        if (options.From == InitOptions.DataSourceType.bam)
+        if (options.From == PileupOptions.DataSourceType.bam)
         {
           Console.WriteLine("Multiple thread mode, parallel by chromosome ...");
           ConcurrentQueue<string> chromosomes = new ConcurrentQueue<string>();
@@ -427,7 +427,7 @@ namespace RSMC
           PileupItemParser parser = options.GetPileupItemParser();
           using (PileupFile pfile = new PileupFile(parser))
           {
-            if (options.From == InitOptions.DataSourceType.mpileup)
+            if (options.From == PileupOptions.DataSourceType.mpileup)
             {
               pfile.Open(options.MpileupFile);
             }

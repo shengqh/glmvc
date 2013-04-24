@@ -62,14 +62,14 @@ namespace RSMC
 
       if (invokedVerb == "init")
       {
-        var initOptions = (InitOptions)invokedVerbInstance;
+        var initOptions = (PileupOptions)invokedVerbInstance;
         if (!initOptions.PrepareOptions())
         {
           Console.Out.WriteLine(initOptions.GetUsage());
           Environment.Exit(-1);
         }
 
-        var samtools = new InitProcessor(initOptions);
+        var samtools = new PileupProcessor(initOptions);
         if (!samtools.Process())
         {
           Environment.Exit(-1);
@@ -131,7 +131,7 @@ namespace RSMC
         }
 
         //run initialize candidates
-        var samtools = new InitProcessor(allOptions);
+        var samtools = new PileupProcessor(allOptions);
         if (!samtools.Process())
         {
           Environment.Exit(-1);
@@ -148,8 +148,8 @@ namespace RSMC
           Environment.Exit(-1);
         }
 
-        var rtools = new FilterProcessor(filterOptions);
-        if (!rtools.Process())
+        var filter = new FilterProcessor(filterOptions);
+        if (!filter.Process())
         {
           Environment.Exit(-1);
         }
@@ -164,8 +164,8 @@ namespace RSMC
           Environment.Exit(-1);
         }
 
-        var annovar = new AnnotationProcessor(annotationOptions);
-        if (!annovar.Process())
+        var annotation = new AnnotationProcessor(annotationOptions);
+        if (!annotation.Process())
         {
           Environment.Exit(-1);
         }

@@ -8,7 +8,7 @@ using RCPA.Utils;
 
 namespace RSMC
 {
-  public class AllOptions : InitOptions
+  public class AllOptions : PileupOptions
   {
 
     [Option("annovar", HelpText = "Annotation by annovar.")]
