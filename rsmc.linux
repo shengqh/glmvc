@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <program name="annovar" command="summarize_annovar.pl">
+    <parameterset name="hg19">
+      <parameter name="verdbsnp" default="137" />
+      <parameter name="ver1000g" default="1000g2012apr" />
+      <parameter name="veresp" default="6500si" />
+      <parameter name="genetype" default="refgene" />
+      <parameter name="databasedir" default="/scratch/cqs/shengq1/references/annovar/humandb/" />
+    </parameterset>
+  </program>
+</config>

@@ -1,0 +1,1 @@
+RSMC.exe -t mpileup -m H:\shengquanhu\projects\somaticmutation\TCGA-A7-A0D9.mpileup -o H:\shengquanhu\projects\somaticmutation\test_single -c 1 > H:\shengquanhu\projects\somaticmutation\test_single.log
