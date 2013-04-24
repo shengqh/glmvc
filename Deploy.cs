@@ -36,7 +36,6 @@ namespace Deployment
         "CQS.Core.dll",
         "Meta.Numerics.dll",
         "RCPA.Core.dll",
-        "RCPA.Proteomics.dll",
         "rsmc.exe",
         "rsmc.linux",
         "rsmc.r"
