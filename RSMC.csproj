@@ -99,10 +99,6 @@
       <Project>{594B9AF6-4E27-4230-A60A-1B61FA3171F9}</Project>
       <Name>RCPA.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RCPA.Proteomics\RCPA.Proteomics.csproj">
-      <Project>{7FF5DF9A-5C66-41A9-A462-65EC502E924F}</Project>
-      <Name>RCPA.Proteomics</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
