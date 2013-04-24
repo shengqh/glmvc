@@ -108,6 +108,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="rsmc.linux">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

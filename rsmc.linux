@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <program name="annovar" command="summarize_annovar.pl">
+  <program name="annovar" command="summarize_annovar.pl" defaultparameterset="">
     <parameterset name="hg19">
       <parameter name="verdbsnp" default="137" />
       <parameter name="ver1000g" default="1000g2012apr" />
@@ -9,4 +9,5 @@
       <parameter name="databasedir" default="/scratch/cqs/shengq1/references/annovar/humandb/" />
     </parameterset>
   </program>
+  <program name="samtools" command="/home/shengq1/local/bin/samtools/samtools" defaultparameterset="" />
 </config>

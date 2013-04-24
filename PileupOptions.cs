@@ -44,6 +44,9 @@ namespace RSMC
     [Option('f', "fasta", MetaValue = "FILE", Required = false, HelpText = "Genome fasta file for samtools mpileup")]
     public string GenomeFastaFile { get; set; }
 
+    [OptionList('r', "chromosomes", MetaValue = "STRING", Separator = ',', Required = false, HelpText = "Default(all chromosomes in genome fasta file) Chromosome names (separted by ',')")]
+    public IList<string> ChromosomeNames { get; set; }
+
     [Option('n', "read_quality", MetaValue = "INT", DefaultValue = 20, HelpText = "Minimum mapQ of read for samtools mpileup")]
     public int MpileupMinimumReadQuality { get; set; }
 
@@ -70,9 +73,6 @@ namespace RSMC
 
     [Option('c', "thread_count", MetaValue = "INT", DefaultValue = 1, HelpText = "Number of thread")]
     public int ThreadCount { get; set; }
-
-    [OptionList('r', "chromosomes", MetaValue = "STRING", Separator = ',', Required = false, HelpText = "Chromosome names (separted by ',')")]
-    public IList<string> ChromosomeNames { get; set; }
 
     [Option('o', "output", MetaValue = "DIRECTORY", Required = true, HelpText = "Output directory")]
     public string OutputDirectory { get; set; }
