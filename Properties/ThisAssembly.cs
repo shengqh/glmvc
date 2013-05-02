@@ -15,6 +15,6 @@ static class ThisAssembly
   internal const string Author = "Quanhu SHENG";
   internal const string Company = "Center for Quantitative Sciences/VUMC";
   internal const string Copyright = "Copyright (C) 2013 " + Company;
-  internal const string Version = "1.0.0.0";
-  internal const string InformationalVersion = "1.0.0.0";
+  internal const string Version = "1.1.0.0";
+  internal const string InformationalVersion = "1.1.0.0";
 }
