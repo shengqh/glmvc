@@ -15,7 +15,7 @@ namespace Deployment
       var appPath = Path.GetFullPath(".");
       Console.WriteLine(appPath);
 
-      string dirName = "RSMC." + ThisAssembly.Version;
+      string dirName = "GLMVC." + ThisAssembly.Version;
       string zipFile = DoZip(appPath, dirName);
     }
 
@@ -36,9 +36,9 @@ namespace Deployment
         "CQS.Core.dll",
         "Meta.Numerics.dll",
         "RCPA.Core.dll",
-        "rsmc.exe",
-        "rsmc.linux",
-        "rsmc.r"
+        "glmvc.exe",
+        "glmvc.linux",
+        "glmvc.r"
       };
 
       foreach (string filename in filenames)

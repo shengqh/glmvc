@@ -11,10 +11,10 @@
 
 static class ThisAssembly
 {
-  internal const string Title = "RNAseq Somatic Mutation Caller (RSMC)";
-  internal const string Author = "Quanhu SHENG";
+  internal const string Title = "General Linear Model Based Somatic Mutation Caller (GLMVC)";
+  internal const string Author = "Quanhu SHENG, Yan Guo";
   internal const string Company = "Center for Quantitative Sciences/VUMC";
-  internal const string Copyright = "Copyright (C) 2013 " + Company;
-  internal const string Version = "1.1.0.0";
-  internal const string InformationalVersion = "1.1.0.0";
+  internal const string Copyright = "Copyright (C) 2013-2015 " + Company;
+  internal const string Version = "1.2.0";
+  internal const string InformationalVersion = Version;
 }
