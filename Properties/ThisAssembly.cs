@@ -12,7 +12,7 @@
 static class ThisAssembly
 {
   internal const string Title = "General Linear Model Based Somatic Mutation Caller (GLMVC)";
-  internal const string Author = "Quanhu SHENG, Yan Guo";
+  internal const string Author = "Quanhu Sheng, Yan Guo";
   internal const string Company = "Center for Quantitative Sciences/VUMC";
   internal const string Copyright = "Copyright (C) 2013-2015 " + Company;
   internal const string Version = "1.2.0";

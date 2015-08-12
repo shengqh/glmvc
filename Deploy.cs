@@ -12,10 +12,10 @@ namespace Deployment
     [Test]
     public void DeployZip()
     {
-      var appPath = Path.GetFullPath(".");
+      var appPath = @"E:\sqh\programs\csharp\OmicsLabCSharp\glmvc\bin\x64\Release";
       Console.WriteLine(appPath);
 
-      string dirName = "GLMVC." + ThisAssembly.Version;
+      string dirName = "GLMVC.x64." + ThisAssembly.Version;
       string zipFile = DoZip(appPath, dirName);
     }
 
@@ -25,26 +25,23 @@ namespace Deployment
 
       CreateAndClearDirectory(dirPath);
 
-      //string[] files = Directory.GetFiles(appPath);
-      //foreach (var file in files)
-      //{
-      //  Console.WriteLine("\"{0}\",", Path.GetFileName(file));
-      //}
-
       string[] filenames = new string[]{
         "CommandLine.dll",
         "CQS.Core.dll",
         "Meta.Numerics.dll",
         "RCPA.Core.dll",
         "glmvc.exe",
-        "glmvc.linux",
-        "glmvc.r"
+        "glmvc.linux"
       };
 
       foreach (string filename in filenames)
       {
         File.Copy(appPath + "\\" + filename, dirPath + "\\" + filename);
       }
+
+      var templateDir = Path.Combine(dirPath, "template");
+      CreateAndClearDirectory(templateDir);
+      File.Copy(appPath + "\\template\\glmvc.r", templateDir + "\\glmvc.r");
 
       string zipFile = dirName + ".zip";
 
