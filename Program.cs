@@ -27,7 +27,8 @@ namespace CQS
         new PipelineProcessorCommand(),
         //new FilterProcessorCommand(),
         new AnnotationProcessorCommand(),
-        new ValidationProcessorCommand()
+        new ValidationProcessorCommand(),
+        new ExtractProcessorCommand()
       }.ToDictionary(m => m.Name.ToLower());
 
 
@@ -61,7 +62,7 @@ namespace CQS
 
     private static void ShowUsage(Dictionary<string, ICommandLineCommand> commands)
     {
-      Console.WriteLine(Constants.GetSqhVanderbiltTitle(ThisAssembly.Title, ThisAssembly.Version));
+      Console.WriteLine(Constants.GetSqhVanderbiltTitle(GlmvcAssembly.Title, GlmvcAssembly.Version));
       Console.WriteLine("Those commands are available :");
       (from c in commands.Values
        select "\t" + c.Name + "\t" + c.Description).ToList().ForEach(Console.WriteLine);

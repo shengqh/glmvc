@@ -3,9 +3,8 @@
   <program name="annovar" command="table_annovar.pl" defaultparameterset="">
     <parameterset name="hg19">
       <parameter name="databasedir" default="/scratch/cqs/shengq1/references/annovar/humandb/" />
-      <parameter name="protocol" default="refGene,snp138,cosmic68" />
-      <parameter name="operation" default="g,f,f" />
+      <parameter name="protocol" default="refGene,snp138,cosmic68,avsift,ljb26_all" />
+      <parameter name="operation" default="g,f,f,f,f" />
     </parameterset>
   </program>
-  <program name="samtools" command="/home/shengq1/local/bin/samtools/samtools" defaultparameterset="" />
 </config>

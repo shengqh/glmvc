@@ -15,7 +15,7 @@ namespace Deployment
       var appPath = @"E:\sqh\programs\csharp\OmicsLabCSharp\glmvc\bin\x64\Release";
       Console.WriteLine(appPath);
 
-      string dirName = "GLMVC.x64." + ThisAssembly.Version;
+      string dirName = "glmvc.x64." + GlmvcAssembly.Version;
       string zipFile = DoZip(appPath, dirName);
     }
 

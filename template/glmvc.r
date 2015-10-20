@@ -5,6 +5,7 @@ outputfile<-"TCGA-BH-A0B3-RNA-TP-NT.tsv"
 file<-"M_13710_A_A_T_2644_54_2032_387_1.5E-77"
 errorrate<-0.01
 pvalue<-0.05
+isvalidation<-0
 ##predefine_end
 
 library("brglm")
@@ -29,10 +30,10 @@ outcols<-c("chr",
            "major_allele", 
            "minor_allele", 
            "ref_allele", 
-           "NORMAL_major_count", 
-           "NORMAL_minor_count", 
-           "TUMOR_major_count", 
-           "TUMOR_minor_count", 
+           "normal_major_count", 
+           "normal_minor_count", 
+           "tumor_major_count", 
+           "tumor_minor_count", 
            "fisher_group", 
            "fisher_normal", 
            "brglm_converged",
@@ -66,7 +67,7 @@ for (i in 1:filecount) {
   
   majordata<-filedata[filedata$Base == major,]
   minordata<-filedata[filedata$Base == minor,]
-  hasScore = mean(minordata$Score) < mean(majordata$Score)
+  hasScore = (median(minordata$Score) - median(majordata$Score) < -2.0)
   
   tumordata<-filedata[filedata$SAMPLE=="TUMOR",]
   hasStrand <- length(unique(tumordata$Strand)) > 1
@@ -227,8 +228,14 @@ passedout<-fout[passed,]
 unpassedout<-fout[!passed,]
 
 passedout$brglm_group_fdr<-p.adjust(passedout$brglm_group, method="fdr")
-failed<-passedout$brglm_group_fdr >= pvalue
-passedout[failed,"filter"]<-"GLM_FDR"
+
+if(isvalidation){
+  failed<-passedout$brglm_group >= pvalue
+  passedout[failed,"filter"]<-"GLM_PVALUE"
+}else{
+  failed<-passedout$brglm_group_fdr >= pvalue
+  passedout[failed,"filter"]<-"GLM_FDR"
+}
 
 gpassed<-passedout$filter == "PASS"
 gpassedout<-passedout[gpassed,]
