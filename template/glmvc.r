@@ -53,11 +53,16 @@ for (i in 1:filecount) {
   cat(paste0(i, "/" , filecount, ":", file, "\n"))
   
   parts<-unlist(strsplit(file,'_'))
-  chr<-parts[1]
-  locus<-parts[2]
-  ref<-parts[3]
-  major<-parts[4]
-  minor<-parts[5]
+  istart<-length(parts)
+  if(is.na(as.numeric(parts[istart]))){
+    istart<-istart-1
+  }
+  istart<-istart-9
+  chr<-paste(parts[1:istart],collapse = '_')
+  locus<-parts[istart+1]
+  ref<-parts[istart+2]
+  major<-parts[istart+3]
+  minor<-parts[istart+4]
   
   filedata<-data[data$Identity == file,]
   filedata$SAMPLE<-factor(filedata$SAMPLE,levels=c("NORMAL", "TUMOR"))

@@ -115,9 +115,6 @@
     <None Include="glmvc.linux">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="template\glmvc-terminal.r">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="template\glmvc.r">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
