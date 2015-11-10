@@ -5,7 +5,7 @@ outputfile<-"TCGA-BH-A0B3-RNA-TP-NT.tsv"
 file<-"M_13710_A_A_T_2644_54_2032_387_1.5E-77"
 errorrate<-0.01
 pvalue<-0.05
-isvalidation<-0
+israwpvalue<-0
 ##predefine_end
 
 library("brglm")
@@ -234,7 +234,7 @@ unpassedout<-fout[!passed,]
 
 passedout$brglm_group_fdr<-p.adjust(passedout$brglm_group, method="fdr")
 
-if(isvalidation){
+if(israwpvalue){
   failed<-passedout$brglm_group >= pvalue
   passedout[failed,"filter"]<-"GLM_PVALUE"
 }else{

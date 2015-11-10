@@ -12,6 +12,10 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2015/11/10 Version 1.3.4
+ 1. Enhanced: add option glm_use_raw_pvalue for filter
+- 2015/11/05 Version 1.3.3
+ 1. Enhanced: add option exclude_bed to exclude specific ranges of genome in bed format
 - 2015/11/01 Version 1.3.2
  1. Bug fixed: Parsing error of msm file name
 - 2015/11/01 Version 1.3.1
