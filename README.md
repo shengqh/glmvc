@@ -12,8 +12,14 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2015/11/17 Version 1.3.6
+ 1. Bug fix: remove a column distance_in_gene_range from result if gtf is provided for distance annotation
+- 2015/11/16 Version 1.3.5
+ 1. Bug fix: table function will miss the first file if the file list doesn't have header
+ 2. Enhanced: table function will include refGeneAAChange in result.
 - 2015/11/10 Version 1.3.4
  1. Enhanced: add option glm_use_raw_pvalue for filter
+ 2. New feature: summarize and build somatic mutation table
 - 2015/11/05 Version 1.3.3
  1. Enhanced: add option exclude_bed to exclude specific ranges of genome in bed format
 - 2015/11/01 Version 1.3.2

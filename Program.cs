@@ -28,7 +28,8 @@ namespace CQS
         //new FilterProcessorCommand(),
         new AnnotationProcessorCommand(),
         new ValidationProcessorCommand(),
-        new ExtractProcessorCommand()
+        new ExtractProcessorCommand(),
+        new SomaticMutationTableBuilderCommand()
       }.ToDictionary(m => m.Name.ToLower());
 
 
