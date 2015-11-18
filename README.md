@@ -12,6 +12,8 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2015/11/18 Version 1.3.7
+ 1. Bug fix: validate: error when reading validation result without minor allele detected.
 - 2015/11/17 Version 1.3.6
  1. Bug fix: remove a column distance_in_gene_range from result if gtf is provided for distance annotation
 - 2015/11/16 Version 1.3.5
