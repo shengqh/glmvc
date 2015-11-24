@@ -7,6 +7,7 @@ errorrate<-0.01
 pvalue<-0.05
 israwpvalue<-0
 ##predefine_end
+checkscore<-0
 
 library("brglm")
 library("stringr")
@@ -72,7 +73,7 @@ for (i in 1:filecount) {
   
   majordata<-filedata[filedata$Base == major,]
   minordata<-filedata[filedata$Base == minor,]
-  hasScore = (median(minordata$Score) - median(majordata$Score) < -2.0)
+  hasScore = ifelse(checkscore, (median(minordata$Score) - median(majordata$Score) < -2.0), 0)
   
   tumordata<-filedata[filedata$SAMPLE=="TUMOR",]
   hasStrand <- length(unique(tumordata$Strand)) > 1

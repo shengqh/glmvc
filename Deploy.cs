@@ -31,7 +31,8 @@ namespace Deployment
         "Meta.Numerics.dll",
         "RCPA.Core.dll",
         "glmvc.exe",
-        "glmvc.linux"
+        "glmvc.linux",
+        "samtools",
       };
 
       foreach (string filename in filenames)

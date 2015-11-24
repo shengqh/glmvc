@@ -12,6 +12,8 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2015/11/24 Version 1.3.8
+ 1. Enhanced: read depth will be used as filter in call mpileup to accelerate the analysis but not in validate mpileup to report accurate result.
 - 2015/11/18 Version 1.3.7
  1. Bug fix: validate: error when reading validation result without minor allele detected.
 - 2015/11/17 Version 1.3.6
