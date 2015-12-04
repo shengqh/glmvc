@@ -6,8 +6,9 @@ file<-"M_13710_A_A_T_2644_54_2032_387_1.5E-77"
 errorrate<-0.01
 pvalue<-0.05
 israwpvalue<-0
+checkscore<-1
+min_median_score_diff<-5
 ##predefine_end
-checkscore<-0
 
 library("brglm")
 library("stringr")
@@ -73,7 +74,7 @@ for (i in 1:filecount) {
   
   majordata<-filedata[filedata$Base == major,]
   minordata<-filedata[filedata$Base == minor,]
-  hasScore = ifelse(checkscore, (median(minordata$Score) - median(majordata$Score) < -2.0), 0)
+  hasScore = ifelse(checkscore, (median(majordata$Score) - median(minordata$Score) >= min_median_score_diff), 0)
   
   tumordata<-filedata[filedata$SAMPLE=="TUMOR",]
   hasStrand <- length(unique(tumordata$Strand)) > 1
