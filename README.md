@@ -12,6 +12,9 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2015/12/16 Version 1.3.12
+ 1. Enhanced: include the validation site +- 500 bases for validation mpileup to avlid the different BAQ calibration result.
+ 2. Bugfix: generate correct count in summary file for validation.
 - 2015/12/07 Version 1.3.11
  1. Bugfix: add use_zero_minor_allele_strategy will cause filter processor exclude all candidates.
 - 2015/12/07 Version 1.3.10
