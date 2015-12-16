@@ -12,6 +12,10 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2015/12/07 Version 1.3.11
+ 1. Bugfix: add use_zero_minor_allele_strategy will cause filter processor exclude all candidates.
+- 2015/12/07 Version 1.3.10
+ 1. Enhanced: add use_zero_minor_allele_strategy to pileup and filter. The candidate without minor allele detected at normal sample will be filtered by loose criteria.
 - 2015/11/30 Version 1.3.9
  1. Enhanced: candidate position will not be used in mpileup for validation. Using "-l candidates.bed" option will cause different BAQ calibration result comparing to using all reads.
 - 2015/11/24 Version 1.3.8

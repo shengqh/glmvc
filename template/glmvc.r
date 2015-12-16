@@ -1,13 +1,15 @@
 ##predefine_begin
-setwd("H:/shengquanhu/projects/somaticmutation/TCGA_rsmc_positionInRead_RNA/TCGA-BH-A0B3-RNA-TP-NT")
-inputfile<-"TCGA-BH-A0B3-RNA-TP-NT.bases"
-outputfile<-"TCGA-BH-A0B3-RNA-TP-NT.tsv"
-file<-"M_13710_A_A_T_2644_54_2032_387_1.5E-77"
+setwd("H:/shengquanhu/projects/GuoYan/20151015_guoyan_glmvc/tcga_rna_nt_glmvc_tp0.1_tr5_score5_np0.02_g0.1/result/TCGA-BH-A0C0-RNA-TP-NT")
+inputfile<-"TCGA-BH-A0C0-RNA-TP-NT.bases"
+outputfile<-"TCGA-BH-A0C0-RNA-TP-NT.unfiltered.new.tsv"
+file<-"9916873_A_A_G_17_0_0_12_1.9E-08"
 errorrate<-0.01
 pvalue<-0.05
 israwpvalue<-0
 checkscore<-1
 min_median_score_diff<-5
+use_zero_minor_allele_strategy<-0
+zero_minor_allele_strategy_glm_pvalue<-0.2
 ##predefine_end
 
 library("brglm")
@@ -17,6 +19,8 @@ data<-read.table(inputfile, header=T, stringsAsFactors=F)
 pmax<-max(data$PositionInRead)
 midx<-round(pmax/2)
 
+brconsts_for_not_converged<-0.5
+
 isdebug<-0
 
 files<-unique(data$Identity)
@@ -25,6 +29,8 @@ if(isdebug){
 }else{
   filecount<-length(files)
 }
+
+notconveraged<-NULL
 
 outcols<-c("chr", 
            "start", 
@@ -48,7 +54,6 @@ outcols<-c("chr",
            "Identity") 
 out<-matrix(NA, length(files), length(outcols))
 colnames(out)<-outcols
-
 for (i in 1:filecount) {
   file<-files[i]
   
@@ -92,95 +97,51 @@ for (i in 1:filecount) {
   }else{
     pvalue.fisher.normal<-fisher.test(ntb)$p.value
   }
-    
+  
   pvalue.brglm.group<-""
   pvalue.brglm.strand<-""
   pvalue.brglm.position<-""
   pvalue.brglm.score<-""
   
-  baseformula<-"Base ~ SAMPLE";
-  res <- try(fit0<-brglm(baseformula, family=binomial, data=filedata))
-  addfake<-FALSE
-  failed<-FALSE
-  if(class(res) == "try-error" || !fit0$converged){
-    if(tb[minor, "NORMAL"] == 0){
-      normaldata<-filedata[filedata$SAMPLE=="NORMAL",]
-      
-      fake<-minordata[1,]
-      fake$SAMPLE<-"NORMAL"
-      fake$Score<-round(mean(minordata$Score))
-      tbstrand<-table(normaldata$Strand)
-      fake$Strand<-ifelse(tbstrand["FORWARD"] < tbstrand["REVERSE"], "FORWARD", "REVERSE")
-      fake$Position<-"MIDDLE"      
-      fake$PositionInRead<-midx      
-      filedata<-rbind(filedata, fake)
-      print ("Add fake normal data.")
-      addfake<-TRUE
-    }
-    
-    if(tb[major, "TUMOR"] == 0){
-      fake<-majordata[1,]
-      fake$SAMPLE<-"TUMOR"
-      fake$Score<-round(mean(majordata$Score))
-      tbstrand<-table(tumordata$Strand)
-      fake$Strand<-ifelse(tbstrand["FORWARD"] < tbstrand["REVERSE"], "FORWARD", "REVERSE")
-      fake$Position<-"MIDDLE"      
-      fake$PositionInRead<-midx     
-      filedata<-rbind(filedata, fake)
-      print ("Add fake tumor data.")
-      addfake<-TRUE
-    }
-    
-    if(addfake){
-      res <- try(fit0<-brglm(baseformula, family=binomial, data=filedata))
-      if(class(res) == "try-error"){
-        failed<-TRUE
-      }
-    }else{
-      failed<-TRUE
-    }
+  formulas<-c("Base ~ SAMPLE + Score + Strand + PositionInRead",
+              "Base ~ SAMPLE + Strand + PositionInRead",
+              "Base ~ SAMPLE + Score + PositionInRead",
+              "Base ~ SAMPLE + Score + Strand",
+              "Base ~ SAMPLE + PositionInRead",
+              "Base ~ SAMPLE + Strand",
+              "Base ~ SAMPLE + Score",
+              "Base ~ SAMPLE")
+  
+  if(!hasScore){
+    formulas<-formulas[!str_detect(formulas, "Score")]
   }
   
-  if(!failed){
-    if(fit0$converged && coef(summary(fit0))[2, 4] < pvalue){
-      formulas<-c("Base ~ SAMPLE + Score + Strand + PositionInRead",
-                  "Base ~ SAMPLE + Strand + PositionInRead",
-                  "Base ~ SAMPLE + Score + PositionInRead",
-                  "Base ~ SAMPLE + Score + Strand",
-                  "Base ~ SAMPLE + PositionInRead",
-                  "Base ~ SAMPLE + Strand",
-                  "Base ~ SAMPLE + Score",
-                  "Base ~ SAMPLE")
-      
-      if(!hasScore){
-        formulas<-formulas[!str_detect(formulas, "Score")]
-      }
-      
-      if(!hasStrand){
-        formulas<-formulas[!str_detect(formulas, "Strand")]
-      }
-      
-      if(!hasPosition){
-        formulas<-formulas[!str_detect(formulas, "PositionInRead")]
-      }
-      
-      for(curformula in formulas){
-        cat("\t", curformula, "\n")
-        
-        if(curformula == baseformula){
-          fit<-fit0
-          break
-        }
-        
-        res <- try(fit<-brglm(curformula, family=binomial, data=filedata))
-        if(class(res) != "try-error" && fit$converged){
-          break
-        }
-      }
-    }else{
-      cat("\t", baseformula, "\n")
-      fit<-fit0
+  if(!hasStrand){
+    formulas<-formulas[!str_detect(formulas, "Strand")]
+  }
+  
+  if(!hasPosition){
+    formulas<-formulas[!str_detect(formulas, "PositionInRead")]
+  }
+  
+  for(curformula in formulas){
+    cat("\t", curformula, "\n")
+    
+    res <- try(fit<-brglm(curformula, family=binomial, data=filedata))
+    if(class(res) != "try-error" && fit$converged){
+      break
     }
+    
+    res <- try(fit<-brglm(curformula, family=binomial, data=filedata, br.consts=brconsts_for_not_converged))
+    if(class(res) != "try-error" && fit$converged){
+      break
+    }
+  }  
+  
+  if(class(res) == "try-error"){
+    failed = TRUE
+  }else{
+    failed = FALSE
   }
   
   pvalue.brglm.converged<-ifelse(failed, FALSE, fit$converged)
@@ -198,6 +159,12 @@ for (i in 1:filecount) {
       }else if(rownames(fit.coef)[index] == "PositionInRead"){
         pvalue.brglm.position<-fit.coef[index, 4] 
       }
+    }
+  }else{
+    if(is.null(notconveraged)){
+      notconveraged <-filedata
+    }else{
+      notconveraged<-rbind(notconveraged, filedata)
     }
   }
   
@@ -226,6 +193,10 @@ for (i in 1:filecount) {
   out[i,]<-v
 }
 
+
+if(!is.null(notconveraged)){
+  write.table(file=paste0(outputfile, ".not_coveraged"), notconveraged, row.names=FALSE, sep="\t", quote=FALSE)
+}
 fout<-data.frame(out, stringsAsFactors=F)
 
 fout$brglm_group<-as.numeric(fout$brglm_group)
@@ -237,10 +208,18 @@ unpassedout<-fout[!passed,]
 passedout$brglm_group_fdr<-p.adjust(passedout$brglm_group, method="fdr")
 
 if(israwpvalue){
-  failed<-passedout$brglm_group >= pvalue
+  if(use_zero_minor_allele_strategy){
+    failed<-(passedout$normal_minor_count == 0 & passedout$brglm_group > zero_minor_allele_strategy_glm_pvalue) | (passedout$normal_minor_count > 0 & passedout$brglm_group > pvalue)
+  }else{
+    failed<-passedout$brglm_group > pvalue
+  }
   passedout[failed,"filter"]<-"GLM_PVALUE"
 }else{
-  failed<-passedout$brglm_group_fdr >= pvalue
+  if(use_zero_minor_allele_strategy){
+    failed<-(passedout$normal_minor_count == 0 & passedout$brglm_group_fdr > zero_minor_allele_strategy_glm_pvalue) | (passedout$normal_minor_count > 0 & passedout$brglm_group_fdr > pvalue)
+  }else{
+    failed<-passedout$brglm_group_fdr > pvalue
+  }
   passedout[failed,"filter"]<-"GLM_FDR"
 }
 
@@ -248,11 +227,6 @@ gpassed<-passedout$filter == "PASS"
 gpassedout<-passedout[gpassed,]
 gunpassedout<-passedout[!gpassed,]
 
-if(nrow(gpassedout) > 0){
-  failed<-gpassedout$fisher_normal <= pvalue
-  gpassedout[failed,"filter"]<-"NORMAL_FISHER"
-}
-  
 filtered<-rbind(unpassedout, gunpassedout, gpassedout)
 rownames(filtered)<-filtered$Identity
 
