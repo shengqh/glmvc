@@ -1,5 +1,9 @@
 GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
+Traditionally, somatic mutations are detected by examining DNA sequence. The maturity of sequencing technology has allowed researchers to screen for somatic mutations in the whole genome. Increasingly, researchers have become interested in identifying somatic mutations through RNAseq data. With this motivation, we evaluated the practicability of detecting somatic mutations from RNAseq data. Current somatic mutation calling tools were designed for DNA sequencing data. To increase performance on RNAseq data, we developed a somatic mutation caller GLMVC based on bias reduced generalized linear model for both DNA and RNA sequencing data. Through comparison with MuTect and Varscan we showed that GLMVC performed better for somatic mutation detection using exome sequencing or RNAseq data. GLMVC is freely available for download at the following website: https://github.com/shengqh/GLMVC/wiki.
+
+Citation: Sheng Q, Zhao S, Li CI, Shyr Y, Guo Y: Practicability of detecting somatic point mutation from RNA high throughput sequencing data. Genomics 2016.
+
 [Build from source](https://github.com/shengqh/glmvc/wiki/Build-from-source)
 
 [Download binary file](https://github.com/shengqh/glmvc/releases)
