@@ -12,6 +12,9 @@ GLMVC: Somatic Mutation Calling Using Both DNA and RNAseq Data
 
 <a name="Changes"/>
 #Changes
+- 2016/04/26 Version 1.3.13
+ 1. Enhanced: add --exclude_bed option to ignore some regions may contains a lot of false positives, for example, introduced human gene in mouse genome.
+ 2. Bugfix: parsing error when chromosome name contains "_".
 - 2015/12/16 Version 1.3.12
  1. Enhanced: include the validation site +- 500 bases for validation mpileup to avlid the different BAQ calibration result.
  2. Bugfix: generate correct count in summary file for validation.
