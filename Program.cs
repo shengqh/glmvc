@@ -1,4 +1,5 @@
 ﻿using CQS.Genome.SomaticMutation;
+using RCPA;
 using RCPA.Commandline;
 using RCPA.Gui.Command;
 using RCPA.Utils;
@@ -32,6 +33,8 @@ namespace CQS
         new SomaticMutationTableBuilderCommand()
       }.ToDictionary(m => m.Name.ToLower());
 
+      SoftwareInfo.SoftwareName = GlmvcAssembly.Name;
+      SoftwareInfo.SoftwareVersion = GlmvcAssembly.Version;
 
       if (!SystemUtils.IsLinux)
       {

@@ -11,10 +11,11 @@
 
 static class GlmvcAssembly
 {
+  internal const string Name = "glmvc";
   internal const string Title = "General Linear Model Based Somatic Mutation Caller (GLMVC)";
   internal const string Author = "Quanhu Sheng, Yu Shyr, Yan Guo";
   internal const string Company = "Center for Quantitative Sciences/VUMC";
-  internal const string Copyright = "Copyright (C) 2013-2015 " + Company;
-  internal const string Version = "1.3.13";
+  internal const string Copyright = "Copyright (C) 2013-2017 " + Company;
+  internal const string Version = "1.3.15";
   internal const string InformationalVersion = Version;
 }

@@ -16,6 +16,10 @@ Citation: Sheng Q, Zhao S, Li CI, Shyr Y, Guo Y: Practicability of detecting som
 
 <a name="Changes"/>
 #Changes
+- 2017/01/31 Version 1.3.15
+ 1. Bugfix: shift one base when read validation list from bed file.
+- 2016/04/28 Version 1.3.14
+ 1. Bugfix: glm_use_raw_pvalue doesn't work.
 - 2016/04/26 Version 1.3.13
  1. Enhanced: add --exclude_bed option to ignore some regions may contains a lot of false positives, for example, introduced human gene in mouse genome.
  2. Bugfix: parsing error when chromosome name contains "_".
