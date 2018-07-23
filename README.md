@@ -16,6 +16,8 @@ Citation: Sheng Q, Zhao S, Li CI, Shyr Y, Guo Y: Practicability of detecting som
 
 <a name="Changes"/>
 #Changes
+
+```
 - 2017/01/31 Version 1.3.15
  1. Bugfix: shift one base when read validation list from bed file.
 - 2016/04/28 Version 1.3.14
@@ -50,3 +52,4 @@ Citation: Sheng Q, Zhao S, Li CI, Shyr Y, Guo Y: Practicability of detecting som
  1. Bug fixed: Parsing error of msm file name
 - 2015/11/01 Version 1.3.1
  1. Bug fixed: Compatible with different chromosome names such like 4_JH584292_random in mm10 database
+```
